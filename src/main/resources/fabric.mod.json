@@ -1,29 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "nile_archery",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Nile Archery",
+  "description": "Adds more bows & crossbows, makes using them easier and more fun!",
   "authors": [
-    "Me!"
+    "The Nile"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "",
+    "sources": ""
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/nile_archery/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "com.github.theniles.archery.items.Items"
+    ],
+    "client": [
+      "com.github.theniles.archery.client.models.items.ModelPredicates"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "nile_archery.mixins.json"
   ],
 
   "depends": {
