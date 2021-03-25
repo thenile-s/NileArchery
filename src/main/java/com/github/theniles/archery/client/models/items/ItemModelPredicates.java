@@ -1,7 +1,7 @@
 package com.github.theniles.archery.client.models.items;
 
 import com.github.theniles.archery.NileArchery;
-import com.github.theniles.archery.items.BowItem;
+import com.github.theniles.archery.items.weapons.BowItem;
 import com.github.theniles.archery.items.Items;
 
 import net.fabricmc.api.ClientModInitializer;
@@ -22,7 +22,7 @@ import net.minecraft.item.ItemStack;
 
 @Environment(EnvType.CLIENT)
 @SuppressWarnings("unused")
-public class ModelPredicates implements ClientModInitializer {
+public class ItemModelPredicates implements ClientModInitializer {
 
     private static float isBowPulling(ItemStack itemStack, ClientWorld clientWorld, LivingEntity entity){
         return  entity != null && entity.isUsingItem() && entity.getActiveItem() == itemStack ? 1 : 0;
@@ -41,9 +41,9 @@ public class ModelPredicates implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         FabricModelPredicateProviderRegistry.register
-                (Items.GOLD_BOW, NileArchery.newId("pulling"), ModelPredicates::isBowPulling);
+                (Items.GOLD_BOW, NileArchery.newId("pulling"), ItemModelPredicates::isBowPulling);
 
         FabricModelPredicateProviderRegistry.register
-                (Items.GOLD_BOW, NileArchery.newId("pull"), ModelPredicates::getBowPull);
+                (Items.GOLD_BOW, NileArchery.newId("pull"), ItemModelPredicates::getBowPull);
     }
 }

@@ -20,10 +20,12 @@
   "entrypoints": {
     "main": [
       "com.github.theniles.archery.items.Items",
-      "com.github.theniles.archery.data.LootTableModifications"
+      "com.github.theniles.archery.data.LootTableModifications",
+      "com.github.theniles.archery.data.Entities"
     ],
     "client": [
-      "com.github.theniles.archery.client.models.items.ModelPredicates"
+      "com.github.theniles.archery.client.models.items.ModelPredicates",
+      "com.github.theniles.archery.client.renderers.EntityRenderers"
     ]
   },
   "mixins": [

@@ -1,4 +1,4 @@
-package com.github.theniles.archery.items;
+package com.github.theniles.archery.items.weapons;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -117,7 +117,7 @@ public class BowItem extends RangedWeaponItem implements Vanishable {
                 if (!((double)f < 0.1D)) {
                     boolean bl2 = bl && itemStack.getItem() == net.minecraft.item.Items.ARROW;
                     if (!world.isClient) {
-                        ArrowItem arrowItem = (ArrowItem)((ArrowItem)(itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : net.minecraft.item.Items.ARROW));
+                        ArrowItem arrowItem = (ArrowItem)((itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : net.minecraft.item.Items.ARROW));
                         PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, itemStack, playerEntity);
                         persistentProjectileEntity.setProperties(playerEntity, playerEntity.pitch, playerEntity.yaw, 0.0F, f * 3.0F, 1.0F);
                         if (f == 1.0F) {
@@ -148,7 +148,7 @@ public class BowItem extends RangedWeaponItem implements Vanishable {
                         world.spawnEntity(persistentProjectileEntity);
                     }
 
-                    world.playSound((PlayerEntity)null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (RANDOM.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (RANDOM.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                     if (!bl2 && !playerEntity.abilities.creativeMode) {
                         itemStack.decrement(1);
                         if (itemStack.isEmpty()) {
