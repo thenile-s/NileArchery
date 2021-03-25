@@ -1,9 +1,12 @@
 package com.github.theniles.archery.client.models.items;
 
 import com.github.theniles.archery.NileArchery;
+import com.github.theniles.archery.items.BowItem;
 import com.github.theniles.archery.items.Items;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 
 import net.minecraft.client.world.ClientWorld;
@@ -16,6 +19,8 @@ import net.minecraft.item.ItemStack;
  * This is used so that the model of bows changes as you use them, giving the visual effect
  * of pulling the bow.
  */
+
+@Environment(EnvType.CLIENT)
 @SuppressWarnings("unused")
 public class ModelPredicates implements ClientModInitializer {
 
@@ -27,7 +32,9 @@ public class ModelPredicates implements ClientModInitializer {
         if (entity == null) {
             return 0.0F;
         } else {
-            return entity.getActiveItem() != itemStack ? 0.0F : (float)(itemStack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20.0F;
+            return entity.getActiveItem() != itemStack ?
+                    0.0F :
+                    ((BowItem)itemStack.getItem()).getPullProgress(entity.getItemUseTime());
         }
     }
 

@@ -4,7 +4,6 @@ import com.github.theniles.archery.NileArchery;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.minecraft.item.BowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -26,8 +25,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class Items implements ModInitializer {
 
-
-
     public static final ItemGroup MOD_GROUP;
 
     public static final BowItem GOLD_BOW;
@@ -37,7 +34,7 @@ public class Items implements ModInitializer {
     }
 
     static {
-        GOLD_BOW = new BowItem(new Item.Settings().maxDamage(364));
+        GOLD_BOW = new BowItem(new Item.Settings().maxDamage(65), 1.25F);
 
         MOD_GROUP = FabricItemGroupBuilder.create(
                 NileArchery.newId("item_group"))
