@@ -21,7 +21,7 @@
     "main": [
       "com.github.theniles.archery.items.Items",
       "com.github.theniles.archery.data.LootTableModifications",
-      "com.github.theniles.archery.data.Entities"
+      "com.github.theniles.archery.entities.Entities"
     ],
     "client": [
       "com.github.theniles.archery.client.models.items.ModelPredicates",
