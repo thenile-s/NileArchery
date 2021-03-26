@@ -19,7 +19,7 @@ public class EntityRenderers implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
 
-        EntityRendererRegistry.INSTANCE.register(Entities.SEA_ARROW, (dispatcher, context) -> new ArrowEntityRenderer(dispatcher));
+        EntityRendererRegistry.INSTANCE.register(Entities.SEA_ARROW, (dispatcher, context) -> new CustomArrowEntityRenderer(dispatcher, Textures.SEA_ARROW));
 
     }
 }

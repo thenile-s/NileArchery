@@ -2,5 +2,13 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "nile_archery:item/sea_arrow"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "nile_archery:tipped":1
+      },
+      "model": "nile_archery:item/sea_arrow_tipped"
+    }
+  ]
 }

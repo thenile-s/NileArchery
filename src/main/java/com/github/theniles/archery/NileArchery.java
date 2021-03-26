@@ -1,7 +1,12 @@
 package com.github.theniles.archery;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.block.Block;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 
 /**
  * The heart of this mod.
@@ -23,5 +28,8 @@ public class NileArchery implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		//TODO a way to set custom colors to arrows?
+		//TODO spectral arrow tipped arrow
+		//For the spectral arrows, add a new recipe serializer for tipped arrows
+		//more mixin
 	}
 }

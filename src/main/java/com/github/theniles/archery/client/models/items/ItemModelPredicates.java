@@ -12,6 +12,10 @@ import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredica
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 
 /**
  * A client-side mod initializer used to register item model predicates.
@@ -38,6 +42,21 @@ public class ItemModelPredicates implements ClientModInitializer {
         }
     }
 
+    private static float isTipped(ItemStack stack, ClientWorld clientWorld, LivingEntity entity){
+        CompoundTag tag = stack.getTag();
+        //99 == int T_T
+        if(tag != null && tag.contains("CustomPotionColor", 99)){
+            return 1;
+        } else {
+            Potion potion = PotionUtil.getPotion(tag);
+            if(potion != null && potion != Potions.EMPTY){
+                return 1;
+            }
+        }
+
+        return  0;
+    }
+
     @Override
     public void onInitializeClient() {
         FabricModelPredicateProviderRegistry.register
@@ -45,5 +64,8 @@ public class ItemModelPredicates implements ClientModInitializer {
 
         FabricModelPredicateProviderRegistry.register
                 (Items.GOLD_BOW, NileArchery.newId("pull"), ItemModelPredicates::getBowPull);
+
+        FabricModelPredicateProviderRegistry.register
+                (Items.SEA_ARROW, NileArchery.newId("tipped"), ItemModelPredicates::isTipped);
     }
 }
