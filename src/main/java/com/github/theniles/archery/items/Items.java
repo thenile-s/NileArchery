@@ -2,6 +2,8 @@ package com.github.theniles.archery.items;
 
 import com.github.theniles.archery.NileArchery;
 
+import com.github.theniles.archery.entities.Entities;
+import com.github.theniles.archery.items.projectiles.CustomArrowItem;
 import com.github.theniles.archery.items.weapons.BowItem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -29,12 +31,17 @@ public class Items implements ModInitializer {
 
     public static final BowItem GOLD_BOW;
 
+    public static final CustomArrowItem SEA_ARROW;
+
     private static void appendItemGroupStacks(List<ItemStack> displayItems){
         displayItems.add(new ItemStack(GOLD_BOW));
+        displayItems.add(new ItemStack(SEA_ARROW));
     }
 
     static {
         GOLD_BOW = new BowItem(new Item.Settings().maxDamage(65), 1.25F);
+
+        SEA_ARROW = new CustomArrowItem(new Item.Settings().maxCount(64), Entities.SEA_ARROW);
 
         MOD_GROUP = FabricItemGroupBuilder.create(
                 NileArchery.newId("item_group"))
@@ -45,5 +52,6 @@ public class Items implements ModInitializer {
     @Override
     public void onInitialize() {
         Registry.register(Registry.ITEM, NileArchery.newId("gold_bow"), GOLD_BOW);
+        Registry.register(Registry.ITEM, NileArchery.newId("sea_arrow"), SEA_ARROW);
     }
 }

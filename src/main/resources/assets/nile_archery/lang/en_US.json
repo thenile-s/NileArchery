@@ -1,5 +1,6 @@
 {
   "itemGroup.nile_archery.item_group" : "Nile Archery",
 
-  "item.nile_archery.gold_bow" : "Gold Bow"
+  "item.nile_archery.gold_bow" : "Golden Bow",
+  "item.nile_archery.sea_arrow" : "Sea Arrow"
 }
