@@ -20,8 +20,9 @@
   "entrypoints": {
     "main": [
       "com.github.theniles.archery.items.Items",
-      "com.github.theniles.archery.data.LootTableModifications",
-      "com.github.theniles.archery.entities.Entities"
+      "com.github.theniles.archery.data.loot.LootTableModifications",
+      "com.github.theniles.archery.entities.Entities",
+      "com.github.theniles.archery.data.recipes.SpecialRecipes"
     ],
     "client": [
       "com.github.theniles.archery.client.models.items.ItemModelPredicates",

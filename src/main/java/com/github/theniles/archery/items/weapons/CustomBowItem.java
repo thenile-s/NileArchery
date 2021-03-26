@@ -21,14 +21,14 @@ import java.util.function.Predicate;
  * This class contains code to instantiate configurable bow items.
  * Not all the code related to how bows works is located here.
  */
-public class BowItem extends RangedWeaponItem implements Vanishable {
+public class CustomBowItem extends RangedWeaponItem implements Vanishable {
 
     /**
      * Constructs a bow item with the specified item settings and bow settings.
      * @param settings The item settings
      * @param pullProgressDivisor A value used to control how fast the bow charges up.
      */
-    public BowItem(Settings settings, float pullProgressDivisor) {
+    public CustomBowItem(Settings settings, float pullProgressDivisor) {
         super(settings);
 
         this.pullProgressDivisor = pullProgressDivisor;

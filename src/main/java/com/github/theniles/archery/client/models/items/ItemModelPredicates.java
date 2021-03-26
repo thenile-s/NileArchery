@@ -1,7 +1,7 @@
 package com.github.theniles.archery.client.models.items;
 
 import com.github.theniles.archery.NileArchery;
-import com.github.theniles.archery.items.weapons.BowItem;
+import com.github.theniles.archery.items.weapons.CustomBowItem;
 import com.github.theniles.archery.items.Items;
 
 import net.fabricmc.api.ClientModInitializer;
@@ -34,7 +34,7 @@ public class ItemModelPredicates implements ClientModInitializer {
         } else {
             return entity.getActiveItem() != itemStack ?
                     0.0F :
-                    ((BowItem)itemStack.getItem()).getPullProgress(entity.getItemUseTime());
+                    ((CustomBowItem)itemStack.getItem()).getPullProgress(entity.getItemUseTime());
         }
     }
 

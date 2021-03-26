@@ -1,4 +1,4 @@
-package com.github.theniles.archery.data;
+package com.github.theniles.archery.data.loot;
 
 import com.github.theniles.archery.items.Items;
 

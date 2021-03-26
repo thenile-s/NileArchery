@@ -22,6 +22,6 @@ public class NileArchery implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-
+		//TODO a way to set custom colors to arrows?
 	}
 }

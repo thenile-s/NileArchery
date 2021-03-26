@@ -8,16 +8,21 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Base class for all new arrows.
@@ -62,7 +67,7 @@ public abstract class CustomArrowEntity extends ArrowEntity {
         if(itemStack.getItem() != null &&
                 (!(itemStack.getItem() instanceof  CustomArrowItem) ||
                 ((CustomArrowItem)itemStack.getItem()).getPersistsStatusEffects())){
-            ArrowEntityAccessor accessor = ((ArrowEntityAccessor)(ArrowEntity)this);
+            ArrowEntityAccessor accessor = ((ArrowEntityAccessor)this);
             PotionUtil.setPotion(itemStack, accessor.getPotion());
             PotionUtil.setCustomPotionEffects(itemStack, accessor.getEffects());
             if(accessor.getColorSet()){
@@ -70,6 +75,48 @@ public abstract class CustomArrowEntity extends ArrowEntity {
             }
         }
         return itemStack;
+    }
+
+    /**
+     * This method seems to be used for NBT initialisation, such as potion effects.
+     *
+     * The same vanilla effect has been replicated here to allow for custom tipped arrows.
+     * @param stack The item stack containing the NBT data with which to initialize the arrow
+     */
+    @Override
+    public void initFromStack(ItemStack stack) {
+
+        ArrowEntityAccessor accessor = (ArrowEntityAccessor)this;
+
+        boolean hasPotionData =
+                stack.hasTag() && (
+                        stack.getTag().contains("Potion") ||
+                        stack.getTag().contains("CustomPotionEffects")  ||
+                        stack.getTag().contains("CustomPotionColor"));
+
+        if (hasPotionData) {
+            accessor.setPotion(PotionUtil.getPotion(stack));
+            Collection<StatusEffectInstance> collection = PotionUtil.getCustomPotionEffects(stack);
+            if (!collection.isEmpty()) {
+                Iterator var3 = collection.iterator();
+
+                while(var3.hasNext()) {
+                    StatusEffectInstance statusEffectInstance = (StatusEffectInstance)var3.next();
+                    accessor.getEffects().add(new StatusEffectInstance(statusEffectInstance));
+                }
+            }
+
+            int i = getCustomPotionColor(stack);
+            if (i == -1) {
+                    accessor.invokeInitColor();
+            } else {
+                accessor.invokeSetColor(i);
+            }
+        } else {
+            accessor.setPotion(Potions.EMPTY);
+            accessor.getEffects().clear();
+            this.dataTracker.set(accessor.getCOLOR(), -1);
+        }
     }
 
     @Override
