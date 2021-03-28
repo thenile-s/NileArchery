@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import java.util.Set;
 
 @Mixin(ArrowEntity.class)
-public interface ArrowEntityAccessor {
+public interface ArrowEntityMixin {
 
     @Accessor("potion")
     public Potion getPotion();

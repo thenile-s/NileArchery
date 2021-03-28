@@ -15,8 +15,11 @@ public class Entities implements ModInitializer {
 
     public static final EntityType<SeaArrowEntity> SEA_ARROW = FabricEntityTypeBuilder.<SeaArrowEntity>create(SpawnGroup.MISC, SeaArrowEntity::new).dimensions(EntityDimensions.fixed(0.5F, 0.5F)).trackRangeBlocks(4).trackedUpdateRate(20).build();
 
+    public static final EntityType<EnderArrowEntity> ENDER_ARROW = FabricEntityTypeBuilder.<EnderArrowEntity>create(SpawnGroup.MISC, EnderArrowEntity::new).dimensions(EntityDimensions.fixed(.5F, .5F)).trackRangeBlocks(4).trackedUpdateRate(20).build();
+
     @Override
     public void onInitialize() {
         Registry.register(Registry.ENTITY_TYPE, NileArchery.newId("sea_arrow"), SEA_ARROW);
+        Registry.register(Registry.ENTITY_TYPE, NileArchery.newId("ender_arrow"), ENDER_ARROW);
     }
 }

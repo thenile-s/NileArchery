@@ -18,8 +18,7 @@ import net.minecraft.client.render.entity.ArrowEntityRenderer;
 public class EntityRenderers implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-
         EntityRendererRegistry.INSTANCE.register(Entities.SEA_ARROW, (dispatcher, context) -> new CustomArrowEntityRenderer(dispatcher, Textures.SEA_ARROW));
-
+        EntityRendererRegistry.INSTANCE.register(Entities.ENDER_ARROW, (dispatcher, context) -> new CustomArrowEntityRenderer(dispatcher, Textures.ENDER_ARROW));
     }
 }

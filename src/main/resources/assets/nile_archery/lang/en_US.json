@@ -3,6 +3,8 @@
 
   "item.nile_archery.gold_bow" : "Golden Bow",
   "item.nile_archery.sea_arrow" : "Sea Arrow",
+  "item.nile_archery.ender_arrow" : "Ender Arrow",
 
-  "entity.nile_archery.sea_arrow" : "Sea Arrow"
+  "entity.nile_archery.sea_arrow" : "Sea Arrow",
+  "entity.nile_archery.ender_arrow" : "Ender Arrow"
 }

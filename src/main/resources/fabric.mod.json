@@ -22,7 +22,8 @@
       "com.github.theniles.archery.items.Items",
       "com.github.theniles.archery.data.loot.LootTableModifications",
       "com.github.theniles.archery.entities.Entities",
-      "com.github.theniles.archery.data.recipes.SpecialRecipes"
+      "com.github.theniles.archery.data.recipes.SpecialRecipes",
+      "com.github.theniles.archery.entities.effects.StatusEffects"
     ],
     "client": [
       "com.github.theniles.archery.client.models.items.ItemModelPredicates",

@@ -2,7 +2,7 @@ package com.github.theniles.archery.entities;
 
 import com.github.theniles.archery.PacketChannelIdentifiers;
 import com.github.theniles.archery.items.projectiles.CustomArrowItem;
-import com.github.theniles.archery.mixin.ArrowEntityAccessor;
+import com.github.theniles.archery.mixin.ArrowEntityMixin;
 import io.netty.buffer.Unpooled;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -67,7 +67,7 @@ public abstract class CustomArrowEntity extends ArrowEntity {
         if(itemStack.getItem() != null &&
                 (!(itemStack.getItem() instanceof  CustomArrowItem) ||
                 ((CustomArrowItem)itemStack.getItem()).getPersistsStatusEffects())){
-            ArrowEntityAccessor accessor = ((ArrowEntityAccessor)this);
+            ArrowEntityMixin accessor = ((ArrowEntityMixin)this);
             PotionUtil.setPotion(itemStack, accessor.getPotion());
             PotionUtil.setCustomPotionEffects(itemStack, accessor.getEffects());
             if(accessor.getColorSet()){
@@ -86,7 +86,7 @@ public abstract class CustomArrowEntity extends ArrowEntity {
     @Override
     public void initFromStack(ItemStack stack) {
 
-        ArrowEntityAccessor accessor = (ArrowEntityAccessor)this;
+        ArrowEntityMixin accessor = (ArrowEntityMixin)this;
 
         boolean hasPotionData =
                 stack.hasTag() && (

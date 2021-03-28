@@ -11,4 +11,5 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class Textures {
     public static final Identifier SEA_ARROW = NileArchery.newId("textures/entity/sea_arrow.png");
+    public static final Identifier ENDER_ARROW = NileArchery.newId("textures/entity/ender_arrow.png");
 }
