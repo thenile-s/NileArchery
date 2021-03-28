@@ -16,21 +16,21 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class SpectralArrowTippedRecipe extends SpecialCraftingRecipe {
+public class SpectralTippedArrowRecipe extends SpecialCraftingRecipe {
 
-    public SpectralArrowTippedRecipe(Identifier id) {
+    public SpectralTippedArrowRecipe(Identifier id) {
         super(id);
     }
-
+//TODO fix
     @Override
     public boolean matches(CraftingInventory craftingInventory, World world) {
         if (craftingInventory.getWidth() == 3 && craftingInventory.getHeight() == 3) {
 
             Item arrowItem = craftingInventory.getStack(0).getItem();
 
-            //only apply this recipe for vanilla spectral arrows
-            //other mods might extend it (tho lbr its a .23238% chance )
-            if(!(arrowItem == Items.SPECTRAL_ARROW)){
+            //only apply this recipe for vanilla spectral arrows or with our arrows
+            //other mods might extend SpectralArrowItem (tho lbr its a .23238% chance )
+            if(arrowItem != com.github.theniles.archery.items.Items.SPECTRAL_ARROW && arrowItem != Items.SPECTRAL_ARROW){
                 return false;
             }
 
@@ -46,7 +46,7 @@ public class SpectralArrowTippedRecipe extends SpecialCraftingRecipe {
                         if (item != Items.LINGERING_POTION) {
                             return false;
                         }
-                    } else if (!(item == arrowItem)) {
+                    } else if(item != Items.SPECTRAL_ARROW && item != com.github.theniles.archery.items.Items.SPECTRAL_ARROW){
                         return false;
                     }
                 }
