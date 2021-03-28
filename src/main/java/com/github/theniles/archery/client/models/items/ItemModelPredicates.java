@@ -70,5 +70,8 @@ public class ItemModelPredicates implements ClientModInitializer {
 
         FabricModelPredicateProviderRegistry.register
                 (Items.ENDER_ARROW, NileArchery.newId("tipped"), ItemModelPredicates::isTipped);
+
+        FabricModelPredicateProviderRegistry.register
+                (Items.SPECTRAL_ARROW, NileArchery.newId("tipped"), ItemModelPredicates::isTipped);
     }
 }

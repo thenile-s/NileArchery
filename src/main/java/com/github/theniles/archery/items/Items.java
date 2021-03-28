@@ -27,9 +27,9 @@ public class Items implements ModInitializer {
 
     /* Adding a new arrow checklist:
         Create new EntityType<CustomArrowEntity> if needed
-            Create the entity
-            Register the type
-            Register a renderer
+        Create the entity
+        Register the entity type
+        Register an entity renderer
         Create a new instance of CustomArrowItem or any subclass and register it
         Don't forget the tipped arrow model if needed
         Don't forget the lang file
@@ -54,14 +54,19 @@ public class Items implements ModInitializer {
 
     public static final CustomArrowItem ENDER_ARROW;
 
+    public static final CustomArrowItem SPECTRAL_ARROW;
+
     static {
         MOD_GROUP = FabricItemGroupBuilder.create(NileArchery.newId("item_group")).icon(()->new ItemStack(Registry.ITEM.get(NileArchery.newId("gold_bow")))).build();
 
-        GOLD_BOW = new CustomBowItem(new Item.Settings().maxDamage(65).group(MOD_GROUP), 1.25F);
+        GOLD_BOW = new CustomBowItem(new Item.Settings().maxDamage(129).group(MOD_GROUP), 1.25F);
 
         SEA_ARROW = CustomArrowItem.newDefault(Entities.SEA_ARROW);
 
         ENDER_ARROW = CustomArrowItem.newDefault(Entities.ENDER_ARROW);
+
+        //Don't make this one show in the creative tab, it would be confusing
+        SPECTRAL_ARROW = new CustomArrowItem(new Item.Settings(), Entities.SPECTRAL_ARROW, true, true);
     }
 
     @Override
@@ -72,5 +77,6 @@ public class Items implements ModInitializer {
         Registry.register(Registry.ITEM, NileArchery.newId("gold_bow"), GOLD_BOW);
         Registry.register(Registry.ITEM, NileArchery.newId("sea_arrow"), SEA_ARROW);
         Registry.register(Registry.ITEM, NileArchery.newId("ender_arrow"), ENDER_ARROW);
+        Registry.register(Registry.ITEM, NileArchery.newId("spectral_arrow"), SPECTRAL_ARROW);
     }
 }

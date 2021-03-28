@@ -24,6 +24,7 @@ import java.util.Arrays;
  * This arrow can hit endermen
  *
  * (Don't tell anyone but it does true damage to ender men :D)
+ * (This could be fixed with 1 line but lbr i cba and nwn)
  *
  * TODO some additional effect related to homing properties
  */
@@ -42,7 +43,7 @@ public class EnderArrowEntity extends CustomArrowEntity {
     public void tick() {
         super.tick();
 
-        //TODO make coo larrow thing
+        //TODO make cool arrow thing
     }
 
     @Override
@@ -98,7 +99,7 @@ public class EnderArrowEntity extends CustomArrowEntity {
 
         if(bl){
             //magic is also apparently a projectile damage source LMFAO
-            //vanilal doesnt have our null check but whatevs idk now
+            //vanilal doesnt have our null check but whatevs
             damageSource2 = DamageSource.mob(entity2 instanceof LivingEntity ?(LivingEntity)entity2 : null);
         }
 

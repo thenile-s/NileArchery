@@ -8,9 +8,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
 
 /**
  * This client-side mod initializer registers color providers for certain items.
@@ -42,6 +40,6 @@ public class ModelColors implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ColorProviderRegistry.ITEM.register(ModelColors::getCustomTippedArrowTint, new ArrowItem[]{Items.SEA_ARROW, Items.ENDER_ARROW});
+        ColorProviderRegistry.ITEM.register(ModelColors::getCustomTippedArrowTint, new ArrowItem[]{Items.SEA_ARROW, Items.ENDER_ARROW, Items.SPECTRAL_ARROW});
     }
 }

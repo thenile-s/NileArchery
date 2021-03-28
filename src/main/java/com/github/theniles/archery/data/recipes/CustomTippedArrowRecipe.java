@@ -18,6 +18,7 @@ public class CustomTippedArrowRecipe extends SpecialCraftingRecipe {
             super(identifier);
         }
 
+        @Override
         public boolean matches(CraftingInventory craftingInventory, World world) {
             if (craftingInventory.getWidth() == 3 && craftingInventory.getHeight() == 3) {
                 //TODO this code could be improved and perhaps made less hard coded
@@ -56,6 +57,7 @@ public class CustomTippedArrowRecipe extends SpecialCraftingRecipe {
             }
         }
 
+        @Override
         public ItemStack craft(CraftingInventory craftingInventory) {
             ItemStack itemStack = craftingInventory.getStack(1 + craftingInventory.getWidth());
             if (itemStack.getItem() != Items.LINGERING_POTION) {
@@ -68,11 +70,13 @@ public class CustomTippedArrowRecipe extends SpecialCraftingRecipe {
             }
         }
 
+        @Override
         @Environment(EnvType.CLIENT)
         public boolean fits(int width, int height) {
             return width >= 2 && height >= 2;
         }
 
+        @Override
         public RecipeSerializer<?> getSerializer() {
             return SpecialRecipes.CUSTOM_TIPPED_ARROW;
         }

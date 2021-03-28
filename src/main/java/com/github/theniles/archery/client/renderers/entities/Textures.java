@@ -12,4 +12,5 @@ import net.minecraft.util.Identifier;
 public class Textures {
     public static final Identifier SEA_ARROW = NileArchery.newId("textures/entity/sea_arrow.png");
     public static final Identifier ENDER_ARROW = NileArchery.newId("textures/entity/ender_arrow.png");
+    public static final Identifier SPECTRAL_ARROW = new Identifier("minecraft","textures/entity/projectiles/spectral_arrow.png");
 }

@@ -1,12 +1,7 @@
 package com.github.theniles.archery;
 
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.block.Block;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.StairsBlock;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 
 /**
  * The heart of this mod.
