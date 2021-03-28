@@ -42,6 +42,6 @@ public class ModelColors implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ColorProviderRegistry.ITEM.register(ModelColors::getCustomTippedArrowTint, new ArrowItem[]{Items.SEA_ARROW});
+        ColorProviderRegistry.ITEM.register(ModelColors::getCustomTippedArrowTint, new ArrowItem[]{Items.SEA_ARROW, Items.ENDER_ARROW});
     }
 }

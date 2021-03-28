@@ -35,6 +35,8 @@ public class Items implements ModInitializer {
         Don't forget the lang file
         Don't forget the arrow tag (data/tags/items/arrows)
         Add any recipes if needed
+        Register item model predicate for tipped
+        Register color provider for tipped
      */
 
     /* Adding a new bow checklist:
