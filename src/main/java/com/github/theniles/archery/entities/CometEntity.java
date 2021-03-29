@@ -8,6 +8,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Packet;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -17,6 +18,15 @@ import net.minecraft.world.explosion.Explosion;
 
 public class CometEntity extends Entity {
 
+    Entity owner;
+    private float damage;
+    private int maxAge;
+    private final float ROTATION_SPEED = 10;
+
+    public CometEntity(EntityType<? extends Entity> type, World world) {
+        super(type, world);
+    }
+
     public float getDamage() {
         return damage;
     }
@@ -24,8 +34,6 @@ public class CometEntity extends Entity {
     public void setDamage(float damage) {
         this.damage = damage;
     }
-
-    private float damage;
 
     public Entity getOwner() {
         return owner;
@@ -35,23 +43,12 @@ public class CometEntity extends Entity {
         this.owner = owner;
     }
 
-    Entity owner;
-
     public int getMaxAge() {
         return maxAge;
     }
 
     public void setMaxAge(int maxAge) {
         this.maxAge = maxAge;
-    }
-
-    private int maxAge;
-
-    public CometEntity(EntityType<? extends Entity> type, World world) {
-        super(type, world);
-        setRotationSpeed(10);
-        setMaxAge(100);
-        setDamage(4);
     }
 
     @Override
@@ -61,16 +58,18 @@ public class CometEntity extends Entity {
 
     @Override
     protected void readCustomDataFromTag(CompoundTag tag) {
-    setMaxAge(tag.getInt("MaxAge"));
-    setDamage(tag.getFloat("Damage"));
-    setOwner(world.getEntityById(tag.getInt("OwnerID")));
+        setMaxAge(tag.getInt("MaxAge"));
+        setDamage(tag.getFloat("Damage"));
+        if (world instanceof ServerWorld) {
+            setOwner(((ServerWorld) world).getEntity(tag.getUuid("OwnerUUID")));
+        }
     }
 
     @Override
     protected void writeCustomDataToTag(CompoundTag tag) {
         tag.putInt("MaxAge", getMaxAge());
         tag.putFloat("Damage", getDamage());
-        tag.putInt("OwnerID", getOwner().getEntityId());//TODO gmm asd
+        tag.putUuid("OwnerUUID", getOwner().getUuid());
     }
 
     @Override
@@ -78,16 +77,16 @@ public class CometEntity extends Entity {
         return EntitySpawnPacket.newPacket(this);
     }
 
-    private boolean entityCollisionPredicate(Entity entity){
+    private boolean entityCollisionPredicate(Entity entity) {
         //same entity check is covered in another method
-        return entity instanceof LivingEntity && entity != getOwner() && entity.collidesWith(this);
+        return entity instanceof LivingEntity && entity != getOwner() && !entity.isTeammate(this);
     }
 
     @Override
     public void tick() {
         if (this.world.isClient) {
-            this.yaw += getRotationSpeed();
-            this.yaw = yaw % 360;//lol idk it looks ok but maybe u should change it
+            this.yaw += ROTATION_SPEED;
+            this.pitch += ROTATION_SPEED;
         } else {
             if (age >= getMaxAge()) {
                 explode(null);
@@ -105,22 +104,12 @@ public class CometEntity extends Entity {
         super.tick();
     }
 
-    public void setRotationSpeed(float rotationSpeed) {
-        this.rotationSpeed = rotationSpeed;
-    }
+    protected void handleHitResult(HitResult hitResult) {
+        if (hitResult.getType() == HitResult.Type.BLOCK) {
+            onBlockHit((BlockHitResult) hitResult);
 
-    private float rotationSpeed;
-
-    public float getRotationSpeed() {
-        return rotationSpeed;
-    }
-
-    protected void handleHitResult(HitResult hitResult){
-        if(hitResult.getType() == HitResult.Type.BLOCK){
-            onBlockHit((BlockHitResult)hitResult);
-
-        } else if(hitResult.getType() == HitResult.Type.ENTITY){
-            onEntityHit((EntityHitResult)hitResult);
+        } else if (hitResult.getType() == HitResult.Type.ENTITY) {
+            onEntityHit((EntityHitResult) hitResult);
         }
     }
 
@@ -132,12 +121,11 @@ public class CometEntity extends Entity {
         explode(hitResult.getEntity());
     }
 
-    protected void explode(Entity entity){
-        if(entity instanceof LivingEntity){
-            LivingEntity livingEntity = (LivingEntity)entity;
-            entity.damage(DamageSource.mob(getOwner() instanceof LivingEntity ? (LivingEntity)(getOwner()) : null ), getDamage());
+    protected void explode(Entity entity) {
+        if (entity != null) {
+            //bypass armor on a direct comet hit :)
+            entity.damage(DamageSource.magic(this, getOwner() instanceof LivingEntity ? getOwner() : null), getDamage());
         }
-
         world.createExplosion(getOwner(), getX(), getY(), getZ(), getDamage(), Explosion.DestructionType.NONE);
         remove();
     }

@@ -9,6 +9,8 @@ import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Quaternion;
 
 public class CometEntityRenderer extends EntityRenderer<CometEntity> {
     protected CometEntityModel model;
@@ -21,8 +23,11 @@ public class CometEntityRenderer extends EntityRenderer<CometEntity> {
 
     @Override
     public void render(CometEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+        //TODO maybe better comet rendering?
+        matrices.push();
+        matrices.multiply(new Quaternion(MathHelper.lerp(tickDelta, entity.prevYaw, entity.yaw), MathHelper.lerp(tickDelta, entity.prevPitch, entity.pitch), 0, true));
         model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(getTexture(entity))), light, OverlayTexture.getUv(0, false), 1, 1, 1, 1);
-        //TODO spin commet
+        matrices.pop();
         //label (name tag)
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }
