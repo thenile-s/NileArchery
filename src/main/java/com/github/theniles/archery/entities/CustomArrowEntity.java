@@ -1,24 +1,17 @@
 package com.github.theniles.archery.entities;
 
-import com.github.theniles.archery.PacketChannelIdentifiers;
 import com.github.theniles.archery.items.projectiles.CustomArrowItem;
 import com.github.theniles.archery.mixin.ArrowEntityMixin;
-import io.netty.buffer.Unpooled;
 
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-
+import com.github.theniles.archery.network.EntitySpawnPacket;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.Packet;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.Collection;
@@ -27,14 +20,12 @@ import java.util.Iterator;
 /**
  * Base class for all new arrows.
  *
- * Contains common code they all need.
+ * Contains common code they all need, such as spawning and tipped arrow handling.
  *
- * Right now, its just the spawn packet creation.
- *
- * "When brain is toast, the mind has no wisdom to boast."
+ * "When the heart is toast, the mind has no wisdom to boast."
  * ~ Sun Tsu - The Art of Mod
  */
-public abstract class CustomArrowEntity extends ArrowEntity {
+public class CustomArrowEntity extends ArrowEntity {
 
     /**
      * This constructor is the factory default, all entities must have this.
@@ -121,29 +112,6 @@ public abstract class CustomArrowEntity extends ArrowEntity {
 
     @Override
     public Packet<?> createSpawnPacket() {
-        return ServerPlayNetworking.createS2CPacket(PacketChannelIdentifiers.ENTITY_SPAWN, writeSpawnData(new PacketByteBuf(Unpooled.buffer())));
-    }
-
-    private PacketByteBuf writeSpawnData(PacketByteBuf packetByteBuf){
-        packetByteBuf.writeVarInt(Registry.ENTITY_TYPE.getRawId(getType()));
-        packetByteBuf.writeUuid(getUuid());
-        packetByteBuf.writeVarInt(getEntityId());
-//TODO improved packet api
-        packetByteBuf.writeDouble(getX());
-        packetByteBuf.writeDouble(getY());
-        packetByteBuf.writeDouble(getZ());
-
-        Vec3d velocity = getVelocity();
-
-        //Why clamp the velocity? Idk, but vanilla does it too
-        //Guess its worth it to reduce packet size...?
-        packetByteBuf.writeShort((int)(MathHelper.clamp(velocity.x, -3.9D, 3.9D) * 8000.0D));
-        packetByteBuf.writeShort((int)(MathHelper.clamp(velocity.y, -3.9D, 3.9D) * 8000.0D));
-        packetByteBuf.writeShort((int)(MathHelper.clamp(velocity.z, -3.9D, 3.9D) * 8000.0D));
-
-        packetByteBuf.writeByte(MathHelper.floor(pitch * 256.0F / 360.0F));
-        packetByteBuf.writeByte(MathHelper.floor(yaw * 256.0F / 360.0F));
-
-        return  packetByteBuf;
+        return EntitySpawnPacket.newPacket(this);
     }
 }

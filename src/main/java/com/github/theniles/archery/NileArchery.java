@@ -2,6 +2,8 @@ package com.github.theniles.archery;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The heart of this mod.
@@ -20,10 +22,11 @@ public class NileArchery implements ModInitializer {
 		return new Identifier(MOD_ID, path);
 	}
 
+	public static final Logger LOGGER = LogManager.getLogger();
+
 	@Override
 	public void onInitialize() {
 		//TODO a way to set custom colors to arrows?
-		//TODO spectral arrow tipped arrow
 		//For the spectral arrows, add a new recipe serializer for tipped arrows
 		//more mixin
 	}

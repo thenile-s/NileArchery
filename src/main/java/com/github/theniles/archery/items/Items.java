@@ -56,6 +56,8 @@ public class Items implements ModInitializer {
 
     public static final CustomArrowItem SPECTRAL_ARROW;
 
+    public static final CustomArrowItem ASTRAL_ARROW;
+
     static {
         MOD_GROUP = FabricItemGroupBuilder.create(NileArchery.newId("item_group")).icon(()->new ItemStack(Registry.ITEM.get(NileArchery.newId("gold_bow")))).build();
 
@@ -67,16 +69,17 @@ public class Items implements ModInitializer {
 
         //Don't make this one show in the creative tab, it would be confusing
         SPECTRAL_ARROW = new CustomArrowItem(new Item.Settings(), Entities.SPECTRAL_ARROW, true, true);
+
+        ASTRAL_ARROW = CustomArrowItem.newDefault(Entities.ASTRAL_ARROW);
     }
 
     @Override
     public void onInitialize() {
-
-        //TODO maybe auto registering items? Or maybe not...
-
         Registry.register(Registry.ITEM, NileArchery.newId("gold_bow"), GOLD_BOW);
+
         Registry.register(Registry.ITEM, NileArchery.newId("sea_arrow"), SEA_ARROW);
         Registry.register(Registry.ITEM, NileArchery.newId("ender_arrow"), ENDER_ARROW);
         Registry.register(Registry.ITEM, NileArchery.newId("spectral_arrow"), SPECTRAL_ARROW);
+        Registry.register(Registry.ITEM, NileArchery.newId("astral_arrow"), ASTRAL_ARROW);
     }
 }

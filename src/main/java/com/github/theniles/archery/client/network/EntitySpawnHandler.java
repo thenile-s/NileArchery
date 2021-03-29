@@ -1,5 +1,6 @@
 package com.github.theniles.archery.client.network;
 
+import com.github.theniles.archery.NileArchery;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -14,6 +15,9 @@ import net.minecraft.util.registry.Registry;
 
 import java.util.UUID;
 
+/**
+ * Handles spawning our entities.
+ */
 @Environment(EnvType.CLIENT)
 public class EntitySpawnHandler implements ClientPlayNetworking.PlayChannelHandler {
     @Override

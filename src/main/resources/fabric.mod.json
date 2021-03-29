@@ -29,7 +29,7 @@
       "com.github.theniles.archery.client.models.items.ItemModelPredicates",
       "com.github.theniles.archery.client.renderers.entities.EntityRenderers",
       "com.github.theniles.archery.client.network.ClientPacketHandlers",
-      "com.github.theniles.archery.client.models.items.ModelColors"
+      "com.github.theniles.archery.client.models.items.ItemModelColors"
     ]
   },
   "mixins": [

@@ -19,10 +19,16 @@ public class Entities implements ModInitializer {
 
     public static final EntityType<SpectralArrowEntity> SPECTRAL_ARROW = FabricEntityTypeBuilder.<SpectralArrowEntity>create(SpawnGroup.MISC, SpectralArrowEntity::new).dimensions(EntityDimensions.fixed(.5F, .5F)).trackRangeBlocks(4).trackedUpdateRate(20).build();
 
+    public static final EntityType<AstralArrowEntity> ASTRAL_ARROW = FabricEntityTypeBuilder.<AstralArrowEntity>create(SpawnGroup.MISC, AstralArrowEntity::new).dimensions(EntityDimensions.fixed(0.5F, 0.5F)).trackRangeBlocks(4).trackedUpdateRate(20).build();
+
+    public static final EntityType<CometEntity> COMET = FabricEntityTypeBuilder.<CometEntity>create(SpawnGroup.MISC, CometEntity::new).dimensions(EntityDimensions.fixed(1.0f, 1.0F)).trackedUpdateRate(20).trackRangeBlocks(4).build();
+
     @Override
     public void onInitialize() {
         Registry.register(Registry.ENTITY_TYPE, NileArchery.newId("sea_arrow"), SEA_ARROW);
         Registry.register(Registry.ENTITY_TYPE, NileArchery.newId("ender_arrow"), ENDER_ARROW);
         Registry.register(Registry.ENTITY_TYPE, NileArchery.newId("spectral_arrow"), SPECTRAL_ARROW);
+        Registry.register(Registry.ENTITY_TYPE, NileArchery.newId("astral_arrow"), ASTRAL_ARROW);
+        Registry.register(Registry.ENTITY_TYPE, NileArchery.newId("comet"), COMET);
     }
 }

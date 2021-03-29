@@ -22,11 +22,6 @@ import java.util.Arrays;
 
 /**
  * This arrow can hit endermen
- *
- * (Don't tell anyone but it does true damage to ender men :D)
- * (This could be fixed with 1 line but lbr i cba and nwn)
- *
- * TODO some additional effect related to homing properties
  */
 public class EnderArrowEntity extends CustomArrowEntity {
     /**
@@ -37,13 +32,6 @@ public class EnderArrowEntity extends CustomArrowEntity {
      */
     public EnderArrowEntity(EntityType<? extends CustomArrowEntity> entityType, World world) {
         super(entityType, world);
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-
-        //TODO make cool arrow thing
     }
 
     @Override
@@ -76,7 +64,7 @@ public class EnderArrowEntity extends CustomArrowEntity {
         }
 
         if (this.isCritical()) {
-            long l = (long)this.random.nextInt(i / 2 + 2);
+            long l = this.random.nextInt(i / 2 + 2);
             i = (int)Math.min(l + (long)i, 2147483647L);
         }
 
@@ -129,7 +117,7 @@ public class EnderArrowEntity extends CustomArrowEntity {
                 }
 
                 this.onHit(livingEntity);
-                if (entity2 != null && livingEntity != entity2 && livingEntity instanceof PlayerEntity && entity2 instanceof ServerPlayerEntity && !this.isSilent()) {
+                if (/*entity2 != null && */livingEntity != entity2 && livingEntity instanceof PlayerEntity && entity2 instanceof ServerPlayerEntity && !this.isSilent()) {
                     ((ServerPlayerEntity)entity2).networkHandler.sendPacket(new GameStateChangeS2CPacket(GameStateChangeS2CPacket.PROJECTILE_HIT_PLAYER, 0.0F));
                 }
 

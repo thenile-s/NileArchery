@@ -21,7 +21,7 @@ public class SpectralTippedArrowRecipe extends SpecialCraftingRecipe {
     public SpectralTippedArrowRecipe(Identifier id) {
         super(id);
     }
-//TODO fix
+
     @Override
     public boolean matches(CraftingInventory craftingInventory, World world) {
         if (craftingInventory.getWidth() == 3 && craftingInventory.getHeight() == 3) {

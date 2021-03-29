@@ -21,7 +21,6 @@ public class CustomTippedArrowRecipe extends SpecialCraftingRecipe {
         @Override
         public boolean matches(CraftingInventory craftingInventory, World world) {
             if (craftingInventory.getWidth() == 3 && craftingInventory.getHeight() == 3) {
-                //TODO this code could be improved and perhaps made less hard coded
                 //Although, it does work and is almost identical to vanilla implementation
                 //"Vanilla. This twisted nightmare scape full of hard coded values and
                 // unreal variable names. What will you make of it?"

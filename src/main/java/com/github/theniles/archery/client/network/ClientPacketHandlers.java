@@ -1,6 +1,6 @@
 package com.github.theniles.archery.client.network;
 
-import com.github.theniles.archery.PacketChannelIdentifiers;
+import com.github.theniles.archery.network.PacketChannelIdentifiers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -13,8 +13,6 @@ public class ClientPacketHandlers implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-
         ClientPlayNetworking.registerGlobalReceiver(PacketChannelIdentifiers.ENTITY_SPAWN, ENTITY_SPAWN_HANDLER);
-
     }
 }

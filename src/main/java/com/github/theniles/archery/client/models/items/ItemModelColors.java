@@ -1,6 +1,7 @@
 package com.github.theniles.archery.client.models.items;
 
 import com.github.theniles.archery.items.Items;
+import com.github.theniles.archery.items.projectiles.CustomArrowItem;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -18,7 +19,7 @@ import net.minecraft.potion.PotionUtil;
  */
 @Environment(EnvType.CLIENT)
 @SuppressWarnings("unused")
-public class ModelColors implements ClientModInitializer {
+public class ItemModelColors implements ClientModInitializer {
 
     public static int getCustomTippedArrowTint(ItemStack itemStack, int tintIndex){
 
@@ -40,6 +41,7 @@ public class ModelColors implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ColorProviderRegistry.ITEM.register(ModelColors::getCustomTippedArrowTint, new ArrowItem[]{Items.SEA_ARROW, Items.ENDER_ARROW, Items.SPECTRAL_ARROW});
+        CustomArrowItem[] tippedArrows = new CustomArrowItem[]{Items.SEA_ARROW, Items.ENDER_ARROW, Items.SPECTRAL_ARROW, Items.ASTRAL_ARROW};
+        ColorProviderRegistry.ITEM.register(ItemModelColors::getCustomTippedArrowTint, tippedArrows);
     }
 }

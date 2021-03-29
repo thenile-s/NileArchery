@@ -1,5 +1,6 @@
-package com.github.theniles.archery;
+package com.github.theniles.archery.network;
 
+import com.github.theniles.archery.NileArchery;
 import net.minecraft.util.Identifier;
 
 /**
