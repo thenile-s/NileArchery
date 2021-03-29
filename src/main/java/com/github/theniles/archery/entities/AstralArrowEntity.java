@@ -74,7 +74,8 @@ public class AstralArrowEntity extends CustomArrowEntity{
                     comet.setOwner(getOwner());
                     comet.setMaxAge(100);
                     //critical hits would be too op :( have to nerf it
-                    comet.setDamage((float) getDamage() * (isCritical() ? 1F : 0.5F));
+                    //"nerf"
+                    comet.setDamage((float) getDamage() * (isCritical() ? 1.5F : 1.0F));
 
                     comet.updatePosition(position.x, position.y, position.z);
                     comet.setVelocity(velocity.x, velocity.y, velocity.z);
