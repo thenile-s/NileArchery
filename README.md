@@ -2,4 +2,4 @@
 
 ## "Code for the code monkey" ~ Sun Tsu - The Art of Mod
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This is a fabric minecraft mod that adds bows, arrows, crossbows, etc. Currently WIP, see planned content on the roadmap.
