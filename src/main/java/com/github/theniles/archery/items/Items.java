@@ -3,10 +3,12 @@ package com.github.theniles.archery.items;
 import com.github.theniles.archery.NileArchery;
 
 import com.github.theniles.archery.entities.Entities;
+import com.github.theniles.archery.items.projectiles.CustomArrowDispenserBehaviour;
 import com.github.theniles.archery.items.projectiles.CustomArrowItem;
 import com.github.theniles.archery.items.weapons.CustomBowItem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -86,5 +88,13 @@ public class Items implements ModInitializer {
         Registry.register(Registry.ITEM, NileArchery.newId("spectral_arrow"), SPECTRAL_ARROW);
         Registry.register(Registry.ITEM, NileArchery.newId("astral_arrow"), ASTRAL_ARROW);
         Registry.register(Registry.ITEM, NileArchery.newId("amethyst_arrow"), AMETHYST_ARROW);
+
+        //dispensers :)
+        //TODO better registering and dispensers api?
+        DispenserBlock.registerBehavior(SEA_ARROW, new CustomArrowDispenserBehaviour(SEA_ARROW));
+        DispenserBlock.registerBehavior(ENDER_ARROW, new CustomArrowDispenserBehaviour(ENDER_ARROW));
+        DispenserBlock.registerBehavior(SPECTRAL_ARROW, new CustomArrowDispenserBehaviour(SPECTRAL_ARROW));
+        DispenserBlock.registerBehavior(ASTRAL_ARROW, new CustomArrowDispenserBehaviour(ASTRAL_ARROW));
+        DispenserBlock.registerBehavior(AMETHYST_ARROW, new CustomArrowDispenserBehaviour(AMETHYST_ARROW));
     }
 }

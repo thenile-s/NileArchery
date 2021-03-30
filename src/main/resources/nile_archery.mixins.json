@@ -4,7 +4,7 @@
   "package": "com.github.theniles.archery.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ArrowEntityMixin", "PersistentProjectileEntityMixin"
+    "ArrowEntityMixin", "PersistentProjectileEntityMixin", "BowEnchantmentTargetMixin"
   ],
   "client": [
   ],

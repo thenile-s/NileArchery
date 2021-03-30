@@ -11,6 +11,7 @@ import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.NotNull;
@@ -67,6 +68,7 @@ public class CustomArrowItem extends ArrowItem {
 
     private boolean craftsTipped;
 
+    //maybe we would want some arrows to drop as other arrows
     public CustomArrowItem(Settings settings, EntityType<? extends CustomArrowEntity> arrowEntityType, ArrowItem pickupItem, boolean persistsStatusEffects, boolean craftsTipped) {
         super(settings);
         setArrowEntityType(arrowEntityType);
@@ -115,6 +117,22 @@ public class CustomArrowItem extends ArrowItem {
 
         //The strange y subtraction value is taken from a PersistentProjectileEntity constructor
         arrowEntity.updatePosition(shooter.getX(), shooter.getEyeY() - 0.10000000149011612D, shooter.getZ());
+
+        return  arrowEntity;
+    }
+
+    public PersistentProjectileEntity createDispensedEntity(World world, ItemStack stack, Position position) {
+        CustomArrowEntity arrowEntity = getArrowEntityType().create(world);
+
+        arrowEntity.setPickupItem(getPickupItem());
+
+        //vanilla (and our own mixin-ed :]) implementation sets status effects here
+        arrowEntity.initFromStack(stack);
+
+        arrowEntity.pickupType = PersistentProjectileEntity.PickupPermission.ALLOWED;
+
+        //The strange y subtraction value is taken from a PersistentProjectileEntity constructor
+        arrowEntity.updatePosition(position.getX(), position.getY(), position.getZ());
 
         return  arrowEntity;
     }

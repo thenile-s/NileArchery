@@ -14,8 +14,6 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import java.util.UUID;
-
 /**
  * Custom projectile entity base class. These should be used when
  * arrow behaviour such as pickup and potion effects is not desirable.
@@ -76,7 +74,10 @@ public abstract class CustomProjectileEntity extends Entity {
 
     protected boolean entityCollisionPredicate(Entity entity) {
         //same entity check is covered in another method
-        return entity instanceof LivingEntity && entity != getOwner() && !entity.isTeammate(this);
+        return entity instanceof LivingEntity &&
+                entity != getOwner() &&
+                !entity.isTeammate(this) &&
+                entity.isAlive(); //a dying entity could block a comet D:< so i fix this here
     }
 
     private void handleHitResult(HitResult hitResult) {
