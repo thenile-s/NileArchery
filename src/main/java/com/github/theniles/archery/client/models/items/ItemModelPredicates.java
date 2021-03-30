@@ -82,5 +82,6 @@ public class ItemModelPredicates implements ClientModInitializer {
         registerTipped(Items.ENDER_ARROW);
         registerTipped(Items.SEA_ARROW);
         registerTipped(Items.ASTRAL_ARROW);
+        registerTipped(Items.AMETHYST_ARROW);
     }
 }

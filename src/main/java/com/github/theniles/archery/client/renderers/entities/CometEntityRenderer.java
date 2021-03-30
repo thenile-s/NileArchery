@@ -10,7 +10,6 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Quaternion;
 
 public class CometEntityRenderer extends EntityRenderer<CometEntity> {
     protected CometEntityModel model;
@@ -23,9 +22,12 @@ public class CometEntityRenderer extends EntityRenderer<CometEntity> {
 
     @Override
     public void render(CometEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-        //TODO maybe better comet rendering?
         matrices.push();
-        matrices.multiply(new Quaternion(MathHelper.lerp(tickDelta, entity.prevYaw, entity.yaw), MathHelper.lerp(tickDelta, entity.prevPitch, entity.pitch), 0, true));
+        //matrices.multiply(new Quaternion(MathHelper.lerp(tickDelta, entity.prevYaw, entity.yaw), MathHelper.lerp(tickDelta, entity.prevPitch, entity.pitch), 0, true));
+        model.setYaw(MathHelper.lerp(tickDelta, entity.prevYaw, entity.yaw));
+        model.setPitch(MathHelper.lerp(tickDelta, entity.prevPitch, entity.pitch));
+        //for some reason we need to translate by half a block t o align it properly
+        matrices.translate(0, 0.5, 0);
         model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(getTexture(entity))), light, OverlayTexture.getUv(0, false), 1, 1, 1, 1);
         matrices.pop();
         //label (name tag)

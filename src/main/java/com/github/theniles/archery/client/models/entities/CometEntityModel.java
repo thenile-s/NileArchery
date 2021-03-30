@@ -13,9 +13,17 @@ public class CometEntityModel extends EntityModel<CometEntity> {
         textureWidth = 64;
         textureHeight = 64;
         bb_main = new ModelPart(this);
-        bb_main.setPivot(0.0F, 14.0F, 0.0F);
+        bb_main.setPivot(0.0F, 0.0F, 0.0F);
         //bb_main.setTextureOffset(0, 24).addCuboid(-4.0F, -12.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
-        bb_main.setTextureOffset(0, 0).addCuboid(-6.0F, -14.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
+        bb_main.setTextureOffset(0, 0).addCuboid(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
+    }
+
+    public void setYaw(float yaw){
+        bb_main.yaw = yaw;
+    }
+
+    public void setPitch(float pitch){
+        bb_main.pitch = pitch;
     }
 
     @Override

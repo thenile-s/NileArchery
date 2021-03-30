@@ -23,5 +23,6 @@ public class EntityRenderers implements ClientModInitializer {
         EntityRendererRegistry.INSTANCE.register(Entities.SPECTRAL_ARROW, (dispatcher, context) -> new CustomArrowEntityRenderer(dispatcher, Textures.SPECTRAL_ARROW));
         EntityRendererRegistry.INSTANCE.register(Entities.ASTRAL_ARROW, (dispatcher, context) -> new CustomArrowEntityRenderer(dispatcher, Textures.ASTRAL_ARROW));
         EntityRendererRegistry.INSTANCE.register(Entities.COMET, (dispatcher, context) -> new CometEntityRenderer(dispatcher));
+        EntityRendererRegistry.INSTANCE.register(Entities.AMETHYST_ARROW, (dispatcher, context) -> new CustomArrowEntityRenderer(dispatcher, Textures.AMETHYST_ARROW));
     }
 }

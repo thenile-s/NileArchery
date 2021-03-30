@@ -25,7 +25,7 @@ import java.util.Iterator;
  * "When the heart is toast, the mind has no wisdom to boast."
  * ~ Sun Tsu - The Art of Mod
  */
-public class CustomArrowEntity extends ArrowEntity {
+public abstract class CustomArrowEntity extends ArrowEntity {
 
     /**
      * This constructor is the factory default, all entities must have this.

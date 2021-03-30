@@ -58,6 +58,8 @@ public class Items implements ModInitializer {
 
     public static final CustomArrowItem ASTRAL_ARROW;
 
+    public static final CustomArrowItem AMETHYST_ARROW;
+
     static {
         MOD_GROUP = FabricItemGroupBuilder.create(NileArchery.newId("item_group")).icon(()->new ItemStack(Registry.ITEM.get(NileArchery.newId("gold_bow")))).build();
 
@@ -71,6 +73,8 @@ public class Items implements ModInitializer {
         SPECTRAL_ARROW = new CustomArrowItem(new Item.Settings(), Entities.SPECTRAL_ARROW, true, true);
 
         ASTRAL_ARROW = CustomArrowItem.newDefault(Entities.ASTRAL_ARROW);
+
+        AMETHYST_ARROW = CustomArrowItem.newDefault(Entities.AMETHYST_ARROW);
     }
 
     @Override
@@ -81,5 +85,6 @@ public class Items implements ModInitializer {
         Registry.register(Registry.ITEM, NileArchery.newId("ender_arrow"), ENDER_ARROW);
         Registry.register(Registry.ITEM, NileArchery.newId("spectral_arrow"), SPECTRAL_ARROW);
         Registry.register(Registry.ITEM, NileArchery.newId("astral_arrow"), ASTRAL_ARROW);
+        Registry.register(Registry.ITEM, NileArchery.newId("amethyst_arrow"), AMETHYST_ARROW);
     }
 }

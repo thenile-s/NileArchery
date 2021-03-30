@@ -41,7 +41,13 @@ public class ItemModelColors implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        CustomArrowItem[] tippedArrows = new CustomArrowItem[]{Items.SEA_ARROW, Items.ENDER_ARROW, Items.SPECTRAL_ARROW, Items.ASTRAL_ARROW};
+        CustomArrowItem[] tippedArrows = new CustomArrowItem[]{
+                Items.SEA_ARROW,
+                Items.ENDER_ARROW,
+                Items.SPECTRAL_ARROW,
+                Items.ASTRAL_ARROW,
+                Items.AMETHYST_ARROW};
+
         ColorProviderRegistry.ITEM.register(ItemModelColors::getCustomTippedArrowTint, tippedArrows);
     }
 }

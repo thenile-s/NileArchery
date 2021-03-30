@@ -1,30 +1,29 @@
 package com.github.theniles.archery.entities;
 
-import com.github.theniles.archery.network.EntitySpawnPacket;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Packet;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
-public class CometEntity extends Entity {
+/**
+ * Nether comet entity spawned by the astral arrows
+ */
+public class CometEntity extends CustomProjectileEntity {
 
-    Entity owner;
     private float damage;
-    private int maxAge;
-    private final float ROTATION_SPEED = 10;
 
     public CometEntity(EntityType<? extends Entity> type, World world) {
         super(type, world);
+        //used in client rendering
+        this.pitch = random.nextFloat();
     }
 
     public float getDamage() {
@@ -35,22 +34,6 @@ public class CometEntity extends Entity {
         this.damage = damage;
     }
 
-    public Entity getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Entity owner) {
-        this.owner = owner;
-    }
-
-    public int getMaxAge() {
-        return maxAge;
-    }
-
-    public void setMaxAge(int maxAge) {
-        this.maxAge = maxAge;
-    }
-
     @Override
     protected void initDataTracker() {
 
@@ -58,65 +41,36 @@ public class CometEntity extends Entity {
 
     @Override
     protected void readCustomDataFromTag(CompoundTag tag) {
-        setMaxAge(tag.getInt("MaxAge"));
+        super.readCustomDataFromTag(tag);
         setDamage(tag.getFloat("Damage"));
-        if (world instanceof ServerWorld) {
-            setOwner(((ServerWorld) world).getEntity(tag.getUuid("OwnerUUID")));
-        }
     }
 
     @Override
     protected void writeCustomDataToTag(CompoundTag tag) {
-        tag.putInt("MaxAge", getMaxAge());
+        super.writeCustomDataToTag(tag);
         tag.putFloat("Damage", getDamage());
-        tag.putUuid("OwnerUUID", getOwner().getUuid());
-    }
-
-    @Override
-    public Packet<?> createSpawnPacket() {
-        return EntitySpawnPacket.newPacket(this);
-    }
-
-    private boolean entityCollisionPredicate(Entity entity) {
-        //same entity check is covered in another method
-        return entity instanceof LivingEntity && entity != getOwner() && !entity.isTeammate(this);
     }
 
     @Override
     public void tick() {
+        //these values are used in the renderer to rotate the comet nicely :p
         if (this.world.isClient) {
-            this.yaw += ROTATION_SPEED;
-            this.pitch += ROTATION_SPEED;
-        } else {
-            if (age >= getMaxAge()) {
-                explode(null);
-                remove();
+            //decided it looks better if the pitch is constant and only the yaw changes
+            this.yaw += 0.6F;
+            if(isSubmergedInWater()){
+                MinecraftClient.getInstance().particleManager.addParticle(ParticleTypes.BUBBLE, getX(), getY(), getZ(), 0, 0, 0);
             }
-
-            HitResult hitResult = ProjectileUtil.getCollision(this, this::entityCollisionPredicate);
-            handleHitResult(hitResult);
         }
-
-        Vec3d newPos = getVelocity().add(getPos());
-
-        updatePosition(newPos.x, newPos.y, newPos.z);
 
         super.tick();
     }
 
-    protected void handleHitResult(HitResult hitResult) {
-        if (hitResult.getType() == HitResult.Type.BLOCK) {
-            onBlockHit((BlockHitResult) hitResult);
-
-        } else if (hitResult.getType() == HitResult.Type.ENTITY) {
-            onEntityHit((EntityHitResult) hitResult);
-        }
-    }
-
+    @Override
     protected void onBlockHit(BlockHitResult hitResult) {
         explode(null);
     }
 
+    @Override
     protected void onEntityHit(EntityHitResult hitResult) {
         explode(hitResult.getEntity());
     }

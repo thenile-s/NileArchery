@@ -6,11 +6,14 @@
   "item.nile_archery.sea_arrow" : "Sea Arrow",
   "item.nile_archery.ender_arrow" : "Ender Arrow",
   "item.nile_archery.spectral_arrow" : "Spectral Arrow",
-  "item.nile_archery.astral_arrow" : "Astral Arrow",
+  "item.nile_archery.astral_arrow" : "Comet Arrow",
+  "item.nile_archery.amethyst_arrow" : "Amethyst Arrow",
+
 
   "entity.nile_archery.sea_arrow" : "Sea Arrow",
   "entity.nile_archery.ender_arrow" : "Ender Arrow",
   "entity.nile_archery.spectral_arrow" : "Spectral Arrow",
-  "entity.nile_archery.astral_arrow" : "Astral Arrow",
-  "entity.nile_archery.comet" : "Nether Comet"
+  "entity.nile_archery.astral_arrow" : "Comet Arrow",
+  "entity.nile_archery.comet" : "Nether Comet",
+  "entity.nile_archery.amethyst_arrow" : "Amethyst Arrow"
 }
