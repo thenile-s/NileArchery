@@ -5,8 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.particle.ParticleEffect;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -23,7 +22,9 @@ public class CometEntity extends CustomProjectileEntity {
     public CometEntity(EntityType<? extends Entity> type, World world) {
         super(type, world);
         //used in client rendering
-        this.pitch = random.nextFloat();
+        //clamping looks better on average imo
+        //this.pitch = MathHelper.clamp(random.nextFloat(), 0.3F, 0.6F);
+        //this.yaw = MathHelper.clamp(random.nextFloat(), 0.3F, 0.6F);
     }
 
     public float getDamage() {
@@ -40,29 +41,32 @@ public class CometEntity extends CustomProjectileEntity {
     }
 
     @Override
-    protected void readCustomDataFromTag(CompoundTag tag) {
-        super.readCustomDataFromTag(tag);
+    protected void readCustomDataFromNbt(NbtCompound tag) {
+        super.readCustomDataFromNbt(tag);
         setDamage(tag.getFloat("Damage"));
     }
 
     @Override
-    protected void writeCustomDataToTag(CompoundTag tag) {
-        super.writeCustomDataToTag(tag);
+    protected void writeCustomDataToNbt(NbtCompound tag) {
+        super.writeCustomDataToNbt(tag);
         tag.putFloat("Damage", getDamage());
     }
 
     @Override
     public void tick() {
+        super.tick();
+
         //these values are used in the renderer to rotate the comet nicely :p
         if (this.world.isClient) {
-            //decided it looks better if the pitch is constant and only the yaw changes
-            this.yaw += 0.6F;
+            //decided it looks better like this
+            this.pitch += 0.35F;
+            this.yaw += 0.35F;
             if(isSubmergedInWater()){
                 MinecraftClient.getInstance().particleManager.addParticle(ParticleTypes.BUBBLE, getX(), getY(), getZ(), 0, 0, 0);
+            } else{
+                MinecraftClient.getInstance().particleManager.addParticle(ParticleTypes.FLAME, getX(), getY(), getZ(), 0, 0, 0);
             }
         }
-
-        super.tick();
     }
 
     @Override
@@ -81,6 +85,6 @@ public class CometEntity extends CustomProjectileEntity {
             entity.damage(DamageSource.magic(this, getOwner() instanceof LivingEntity ? getOwner() : null), getDamage());
         }
         world.createExplosion(getOwner(), getX(), getY(), getZ(), getDamage(), Explosion.DestructionType.NONE);
-        remove();
+        remove(RemovalReason.DISCARDED);
     }
 }

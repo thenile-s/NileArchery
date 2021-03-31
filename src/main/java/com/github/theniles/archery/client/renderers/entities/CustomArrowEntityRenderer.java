@@ -4,6 +4,7 @@ import com.github.theniles.archery.entities.CustomArrowEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.util.Identifier;
 
@@ -16,7 +17,7 @@ public class CustomArrowEntityRenderer extends ProjectileEntityRenderer<CustomAr
 
     private final Identifier texture;
 
-    public CustomArrowEntityRenderer(EntityRenderDispatcher entityRenderDispatcher, Identifier texture) {
+    public CustomArrowEntityRenderer(EntityRendererFactory.Context entityRenderDispatcher, Identifier texture) {
         super(entityRenderDispatcher);
         this.texture = texture;
     }

@@ -56,11 +56,11 @@ public class EnderArrowEntity extends CustomArrowEntity {
             }
 
             if (ppAccessor.getPiercedEntities().size() >= this.getPierceLevel() + 1) {
-                this.remove();
+                this.remove(RemovalReason.DISCARDED);
                 return;
             }
 
-            ppAccessor.getPiercedEntities().add(entity.getEntityId());
+            ppAccessor.getPiercedEntities().add(entity.getId());
         }
 
         if (this.isCritical()) {
@@ -137,7 +137,7 @@ public class EnderArrowEntity extends CustomArrowEntity {
 
             this.playSound(getSound(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
             if (this.getPierceLevel() <= 0) {
-                this.remove();
+                this.remove(RemovalReason.DISCARDED);
             }
         } else {
             entity.setFireTicks(j);
@@ -149,7 +149,7 @@ public class EnderArrowEntity extends CustomArrowEntity {
                     this.dropStack(this.asItemStack(), 0.1F);
                 }
 
-                this.remove();
+                this.remove(RemovalReason.DISCARDED);
             }
         }
     }

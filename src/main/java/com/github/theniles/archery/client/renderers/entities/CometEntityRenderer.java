@@ -7,6 +7,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -14,7 +15,7 @@ import net.minecraft.util.math.MathHelper;
 public class CometEntityRenderer extends EntityRenderer<CometEntity> {
     protected CometEntityModel model;
 
-    protected CometEntityRenderer(EntityRenderDispatcher dispatcher) {
+    public CometEntityRenderer(EntityRendererFactory.Context dispatcher) {
         super(dispatcher);
 
         model = new CometEntityModel();

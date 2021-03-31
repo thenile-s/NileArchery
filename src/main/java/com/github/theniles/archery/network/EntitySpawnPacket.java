@@ -21,7 +21,7 @@ public class EntitySpawnPacket {
     public static PacketByteBuf writeSpawnData(PacketByteBuf packetByteBuf, Entity entity){
         packetByteBuf.writeVarInt(Registry.ENTITY_TYPE.getRawId(entity.getType()));
         packetByteBuf.writeUuid(entity.getUuid());
-        packetByteBuf.writeVarInt(entity.getEntityId());
+        packetByteBuf.writeVarInt(entity.getId());
 
         packetByteBuf.writeDouble(entity.getX());
         packetByteBuf.writeDouble(entity.getY());

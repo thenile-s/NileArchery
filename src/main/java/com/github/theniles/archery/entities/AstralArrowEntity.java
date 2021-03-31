@@ -55,7 +55,7 @@ public class AstralArrowEntity extends CustomArrowEntity{
 
                 for (int i = 0; i < 2 * MAX_COMET_OFFSET; i++) {
                     for (int j = 0; j < 2 * MAX_COMET_OFFSET; j++) {
-                        if(world.getBlockState(pos).isFullCube(world, pos)){
+                        if(!world.getBlockState(pos).getCollisionShape(world, pos).isEmpty()){
                             shouldSpawnComet = false;
                             break;
                         }

@@ -15,5 +15,6 @@
   "entity.nile_archery.spectral_arrow" : "Spectral Arrow",
   "entity.nile_archery.astral_arrow" : "Comet Arrow",
   "entity.nile_archery.comet" : "Nether Comet",
-  "entity.nile_archery.amethyst_arrow" : "Amethyst Arrow"
+  "entity.nile_archery.amethyst_arrow" : "Amethyst Arrow",
+  "entity.nile_archery.amethyst_shard" : "Amethyst Shard"
 }

@@ -25,6 +25,7 @@ public class Entities implements ModInitializer {
 
     public static final EntityType<AmethystArrowEntity> AMETHYST_ARROW = FabricEntityTypeBuilder.<AmethystArrowEntity>create(SpawnGroup.MISC, AmethystArrowEntity::new).dimensions(EntityDimensions.fixed(0.5F, 0.5F)).trackRangeBlocks(4).trackedUpdateRate(20).build();
 
+    public static final EntityType<AmethystShardEntity> AMETHYST_SHARD = FabricEntityTypeBuilder.<AmethystShardEntity>create(SpawnGroup.MISC, AmethystShardEntity::new).dimensions(EntityDimensions.fixed(0.5F, 0.5F)).trackRangeBlocks(4).trackedUpdateRate(20).build();
 
     @Override
     public void onInitialize() {
@@ -34,5 +35,6 @@ public class Entities implements ModInitializer {
         Registry.register(Registry.ENTITY_TYPE, NileArchery.newId("astral_arrow"), ASTRAL_ARROW);
         Registry.register(Registry.ENTITY_TYPE, NileArchery.newId("comet"), COMET);
         Registry.register(Registry.ENTITY_TYPE, NileArchery.newId("amethyst_arrow"), AMETHYST_ARROW);
+        Registry.register(Registry.ENTITY_TYPE, NileArchery.newId("amethyst_shard"), AMETHYST_SHARD);
     }
 }

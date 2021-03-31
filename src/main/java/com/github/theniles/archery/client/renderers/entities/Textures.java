@@ -16,4 +16,5 @@ public class Textures {
     public static final Identifier ASTRAL_ARROW = NileArchery.newId("textures/entity/astral_arrow.png");
     public static final Identifier COMET = NileArchery.newId("textures/entity/comet.png");
     public static final Identifier AMETHYST_ARROW = NileArchery.newId("textures/entity/amethyst_arrow.png");
+    public static final Identifier AMETHYST_SHARD = NileArchery.newId("textures/entity/amethyst_shard.png");
 }

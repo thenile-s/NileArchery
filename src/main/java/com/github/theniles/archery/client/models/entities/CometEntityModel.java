@@ -1,21 +1,27 @@
 package com.github.theniles.archery.client.models.entities;
 
 import com.github.theniles.archery.entities.CometEntity;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class CometEntityModel extends EntityModel<CometEntity> {
     private final ModelPart bb_main;
 
     public CometEntityModel() {
-        textureWidth = 64;
-        textureHeight = 64;
-        bb_main = new ModelPart(this);
+        ModelPart.Cuboid cuboid = new ModelPart.Cuboid(0, 0, -6, -6, -6, 12, 12, 12, 0, 0, 0, false, 64, 64);
+        List<ModelPart.Cuboid> cubes = new ArrayList<ModelPart.Cuboid>(1);
+        cubes.add(cuboid);
+        bb_main = new ModelPart(cubes, new HashMap<>());
         bb_main.setPivot(0.0F, 0.0F, 0.0F);
         //bb_main.setTextureOffset(0, 24).addCuboid(-4.0F, -12.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
-        bb_main.setTextureOffset(0, 0).addCuboid(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 12.0F, 0.0F, false);
     }
 
     public void setYaw(float yaw){
