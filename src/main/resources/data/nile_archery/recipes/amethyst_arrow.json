@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "K",
+    "/",
+    "F"
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "K": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "result": {
+    "item": "nile_archery:amethyst_arrow",
+    "count": 4
+  }
+}

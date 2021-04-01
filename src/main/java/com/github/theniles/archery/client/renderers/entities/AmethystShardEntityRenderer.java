@@ -2,6 +2,8 @@ package com.github.theniles.archery.client.renderers.entities;
 
 import com.github.theniles.archery.client.models.entities.AmethystShardEntityModel;
 import com.github.theniles.archery.entities.AmethystShardEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -11,6 +13,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
+@Environment(EnvType.CLIENT)
 public class AmethystShardEntityRenderer extends EntityRenderer<AmethystShardEntity> {
     private AmethystShardEntityModel model;
 

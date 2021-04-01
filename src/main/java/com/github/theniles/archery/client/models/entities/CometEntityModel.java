@@ -3,6 +3,8 @@ package com.github.theniles.archery.client.models.entities;
 import com.github.theniles.archery.entities.CometEntity;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Environment(EnvType.CLIENT)
 public class CometEntityModel extends EntityModel<CometEntity> {
     private final ModelPart bb_main;
 

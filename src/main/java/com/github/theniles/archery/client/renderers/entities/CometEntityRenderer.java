@@ -2,6 +2,8 @@ package com.github.theniles.archery.client.renderers.entities;
 
 import com.github.theniles.archery.client.models.entities.CometEntityModel;
 import com.github.theniles.archery.entities.CometEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -12,6 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
+@Environment(EnvType.CLIENT)
 public class CometEntityRenderer extends EntityRenderer<CometEntity> {
     protected CometEntityModel model;
 

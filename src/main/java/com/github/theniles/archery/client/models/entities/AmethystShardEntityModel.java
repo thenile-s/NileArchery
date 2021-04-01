@@ -1,5 +1,7 @@
 package com.github.theniles.archery.client.models.entities;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Environment(EnvType.CLIENT)
 public class AmethystShardEntityModel extends EntityModel<Entity> {
     private ModelPart bb_main;
 
