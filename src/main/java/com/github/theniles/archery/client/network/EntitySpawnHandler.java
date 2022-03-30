@@ -41,14 +41,14 @@ public class EntitySpawnHandler implements ClientPlayNetworking.PlayChannelHandl
         client.execute(()->{
             Entity entity = entityType.create(client.world);
 
-            entity.setEntityId(id);
+            entity.setId(id);
             entity.setUuid(uuid);
 
             entity.updateTrackedPosition(x, y, z);
             entity.setPos(x, y, z);
             entity.setVelocityClient(velocityX, velocityY, velocityZ    );
-            entity.pitch = pitch;
-            entity.yaw = yaw;
+            entity.setPitch(pitch);
+            entity.setYaw(yaw);
             client.world.addEntity(id, entity);
         });
     }

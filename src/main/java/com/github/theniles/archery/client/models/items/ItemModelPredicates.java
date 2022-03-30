@@ -13,7 +13,7 @@ import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredica
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
@@ -24,17 +24,19 @@ import net.minecraft.util.Identifier;
  *
  * This is used so that the model of bows changes as you use them, giving the visual effect
  * of pulling the bow.
+ * 
+ * Who tf knows what int i in the predicates does :/ meh whatevre it appeared in 1.18.2
  */
 
 @Environment(EnvType.CLIENT)
 @SuppressWarnings("unused")
 public class ItemModelPredicates implements ClientModInitializer {
 
-    private static float isBowPulling(ItemStack itemStack, ClientWorld clientWorld, LivingEntity entity){
+    private static float isBowPulling(ItemStack itemStack, ClientWorld clientWorld, LivingEntity entity, int i){
         return  entity != null && entity.isUsingItem() && entity.getActiveItem() == itemStack ? 1 : 0;
     }
 
-    private static float getBowPull(ItemStack itemStack, ClientWorld clientWorld, LivingEntity entity){
+    private static float getBowPull(ItemStack itemStack, ClientWorld clientWorld, LivingEntity entity, int i){
         if (entity == null) {
             return 0.0F;
         } else {
@@ -44,8 +46,8 @@ public class ItemModelPredicates implements ClientModInitializer {
         }
     }
 
-    private static float isTipped(ItemStack stack, ClientWorld clientWorld, LivingEntity entity){
-        CompoundTag tag = stack.getTag();
+    private static float isTipped(ItemStack stack, ClientWorld clientWorld, LivingEntity entity, int i){
+        NbtCompound tag = stack.getNbt();
         //99 == int T_T
         if(tag != null && tag.contains("CustomPotionColor", 99)){
             return 1;

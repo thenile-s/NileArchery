@@ -40,7 +40,8 @@ public class AstralArrowEntity extends CustomArrowEntity{
     }
 
     protected Vec3d getCometVelocity(Vec3d pos, Vec3d destination, double speed){
-        return pos.reverseSubtract(destination).normalize().multiply(speed);
+        //used to be pos reverse substract destination
+        return destination.subtract(pos).normalize().multiply(speed);
     }
 
     @Override

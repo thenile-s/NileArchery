@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nile_archery:item/astral_arrow",
+    "layer1": "nile_archery:item/tipped_arrow_drops"
+  }
+}

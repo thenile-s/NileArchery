@@ -2,7 +2,6 @@ package com.github.theniles.archery.entities.effects;
 
 import com.github.theniles.archery.NileArchery;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.util.registry.Registry;
 
 /*

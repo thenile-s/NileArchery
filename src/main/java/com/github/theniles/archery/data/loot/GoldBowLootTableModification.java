@@ -9,6 +9,8 @@ import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.minecraft.loot.*;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.*;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 
@@ -20,9 +22,9 @@ public class GoldBowLootTableModification implements LootTableLoadingCallback {
         if(id.equals(LootTables.BASTION_TREASURE_CHEST)){
             //Find it once per chest, with a durability between 20% and 80% of its durability
             LootPool loot = FabricLootPoolBuilder.builder()
-                    .rolls(ConstantLootTableRange.create(1))
+                    .rolls(ConstantLootNumberProvider.create(1))
                     .withEntry(ItemEntry.builder(Items.GOLD_BOW)
-                            .apply(SetDamageLootFunction.builder(UniformLootTableRange.between(0.2F, 0.8F))).build())
+                            .apply(SetDamageLootFunction.builder(UniformLootNumberProvider.create(0.2F, 0.8F))).build())
                     .build();
 
             supplier.withPool(loot);

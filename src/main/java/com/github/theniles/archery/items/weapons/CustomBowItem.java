@@ -92,7 +92,7 @@ public class CustomBowItem extends RangedWeaponItem implements Vanishable {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         boolean bl = !user.getArrowType(itemStack).isEmpty();
-        if (!user.abilities.creativeMode && !bl) {
+        if (!user.getAbilities().creativeMode && !bl) {
             return TypedActionResult.fail(itemStack);
         } else {
             user.setCurrentHand(hand);
@@ -105,7 +105,7 @@ public class CustomBowItem extends RangedWeaponItem implements Vanishable {
         //TODO maybe look over the vanilla code for your own learning :p (To Daniel)
         if (user instanceof PlayerEntity) {
             PlayerEntity playerEntity = (PlayerEntity)user;
-            boolean bl = playerEntity.abilities.creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
+            boolean bl = playerEntity.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
             ItemStack itemStack = playerEntity.getArrowType(stack);
             if (!itemStack.isEmpty() || bl) {
                 if (itemStack.isEmpty()) {
@@ -119,7 +119,12 @@ public class CustomBowItem extends RangedWeaponItem implements Vanishable {
                     if (!world.isClient) {
                         ArrowItem arrowItem = (ArrowItem)((itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : net.minecraft.item.Items.ARROW));
                         PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, itemStack, playerEntity);
-                        persistentProjectileEntity.setProperties(playerEntity, playerEntity.pitch, playerEntity.yaw, 0.0F, f * 3.0F, 1.0F);
+                        //Not a method anymore for some reason :/
+                        //persistentProjectileEntity.setProperties(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F, 1.0F);
+                        //What BowItem does instead now (1.18.2)
+                        //ig method got renamed or smth same args no?
+                        persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, f * 3.0f, 1.0f);
+                        
                         if (f == 1.0F) {
                             persistentProjectileEntity.setCritical(true);
                         }
@@ -141,18 +146,18 @@ public class CustomBowItem extends RangedWeaponItem implements Vanishable {
                         stack.damage(1, playerEntity, (p) -> {
                             p.sendToolBreakStatus(playerEntity.getActiveHand());
                         });
-                        if (bl2 || playerEntity.abilities.creativeMode && (itemStack.getItem() == net.minecraft.item.Items.SPECTRAL_ARROW || itemStack.getItem() == Items.TIPPED_ARROW)) {
+                        if (bl2 || playerEntity.getAbilities().creativeMode && (itemStack.getItem() == net.minecraft.item.Items.SPECTRAL_ARROW || itemStack.getItem() == Items.TIPPED_ARROW)) {
                             persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
                         }
 
                         world.spawnEntity(persistentProjectileEntity);
                     }
 
-                    world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (RANDOM.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-                    if (!bl2 && !playerEntity.abilities.creativeMode) {
+                    world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    if (!bl2 && !playerEntity.getAbilities().creativeMode) {
                         itemStack.decrement(1);
                         if (itemStack.isEmpty()) {
-                            playerEntity.inventory.removeOne(itemStack);
+                            playerEntity.getInventory().removeOne(itemStack);
                         }
                     }
 

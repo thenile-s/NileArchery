@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.potion.PotionUtil;
 
 /**
@@ -24,7 +24,7 @@ public class ItemModelColors implements ClientModInitializer {
     public static int getCustomTippedArrowTint(ItemStack itemStack, int tintIndex){
 
         if(tintIndex == 1){
-            CompoundTag tag = itemStack.getTag();
+            NbtCompound tag = itemStack.getNbt();
             //99 == int T_T
             if(tag != null && tag.contains("CustomPotionColor", 99)){
                 return tag.getInt("CustomPotionColor");

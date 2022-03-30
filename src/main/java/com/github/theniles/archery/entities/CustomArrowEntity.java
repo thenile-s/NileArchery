@@ -62,7 +62,7 @@ public abstract class CustomArrowEntity extends ArrowEntity {
             PotionUtil.setPotion(itemStack, accessor.getPotion());
             PotionUtil.setCustomPotionEffects(itemStack, accessor.getEffects());
             if(accessor.getColorSet()){
-                itemStack.getOrCreateTag().putInt("CustomPotionColor", getColor());
+                itemStack.getOrCreateNbt().putInt("CustomPotionColor", getColor());
             }
         }
         return itemStack;
@@ -80,10 +80,10 @@ public abstract class CustomArrowEntity extends ArrowEntity {
         ArrowEntityMixin accessor = (ArrowEntityMixin)this;
 
         boolean hasPotionData =
-                stack.hasTag() && (
-                        stack.getTag().contains("Potion") ||
-                        stack.getTag().contains("CustomPotionEffects")  ||
-                        stack.getTag().contains("CustomPotionColor"));
+                stack.hasNbt() && (
+                        stack.getNbt().contains("Potion") ||
+                        stack.getNbt().contains("CustomPotionEffects")  ||
+                        stack.getNbt().contains("CustomPotionColor"));
 
         if (hasPotionData) {
             accessor.setPotion(PotionUtil.getPotion(stack));

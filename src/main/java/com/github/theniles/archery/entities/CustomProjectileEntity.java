@@ -5,7 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
@@ -39,7 +39,7 @@ public abstract class CustomProjectileEntity extends Entity {
     }
 
     @Override
-    protected void readCustomDataFromTag(CompoundTag tag) {
+    protected void readCustomDataFromNbt(NbtCompound tag) {
             if(world instanceof ServerWorld){
                 if(tag.containsUuid("OwnerUUID")){
                     setOwner(((ServerWorld)world).getEntity(tag.getUuid("OwnerUUID")));
@@ -48,7 +48,7 @@ public abstract class CustomProjectileEntity extends Entity {
     }
 
     @Override
-    protected void writeCustomDataToTag(CompoundTag tag) {
+    protected void writeCustomDataToNbt(NbtCompound tag) {
         if(getOwner() != null && world instanceof ServerWorld){
             tag.putUuid("OwnerUUID", getOwner().getUuid());
         }

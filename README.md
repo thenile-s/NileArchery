@@ -4,4 +4,4 @@
 
 ## "Code for the code monkey" ~ Sun Tsu - The Art of Mod
 
-This is a fabric minecraft mod that adds bows, arrows, crossbows, etc. Currently WIP, see planned content on the roadmap.
+Life hits hard huh? But maybe not as hard as some of these ranged weapons.

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.github.theniles.archery.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "ArrowEntityMixin", "PersistentProjectileEntityMixin", "BowEnchantmentTargetMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

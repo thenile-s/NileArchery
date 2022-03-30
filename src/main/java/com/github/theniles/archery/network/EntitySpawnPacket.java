@@ -21,7 +21,7 @@ public class EntitySpawnPacket {
     public static PacketByteBuf writeSpawnData(PacketByteBuf packetByteBuf, Entity entity){
         packetByteBuf.writeVarInt(Registry.ENTITY_TYPE.getRawId(entity.getType()));
         packetByteBuf.writeUuid(entity.getUuid());
-        packetByteBuf.writeVarInt(entity.getEntityId());
+        packetByteBuf.writeVarInt(entity.getId());
 
         packetByteBuf.writeDouble(entity.getX());
         packetByteBuf.writeDouble(entity.getY());
@@ -35,8 +35,8 @@ public class EntitySpawnPacket {
         packetByteBuf.writeShort((int)(MathHelper.clamp(velocity.y, -3.9D, 3.9D) * 8000.0D));
         packetByteBuf.writeShort((int)(MathHelper.clamp(velocity.z, -3.9D, 3.9D) * 8000.0D));
 
-        packetByteBuf.writeByte(MathHelper.floor(entity.pitch * 256.0F / 360.0F));
-        packetByteBuf.writeByte(MathHelper.floor(entity.yaw * 256.0F / 360.0F));
+        packetByteBuf.writeByte(MathHelper.floor(entity.getPitch() * 256.0F / 360.0F));
+        packetByteBuf.writeByte(MathHelper.floor(entity.getYaw() * 256.0F / 360.0F));
 
         return  packetByteBuf;
     }

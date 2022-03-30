@@ -1,11 +1,13 @@
 package com.github.theniles.archery.entities;
 
+import com.github.theniles.archery.NileArchery;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.BlockHitResult;
@@ -20,10 +22,22 @@ public class CometEntity extends CustomProjectileEntity {
 
     private float damage;
 
+    private float roll;
+
+    public float getRoll()
+    {
+        return roll;
+    }
+
     public CometEntity(EntityType<? extends Entity> type, World world) {
         super(type, world);
         //used in client rendering
-        this.pitch = random.nextFloat();
+        if(world.isClient)
+        {
+            //this.setPitch(world.getRandom().nextFloat(0.2f, 0.8f));
+            //from investigation (1.18.2) pitch seems ot be useless, so we have to use roll
+            roll = world.random.nextFloat();
+        }
     }
 
     public float getDamage() {
@@ -40,15 +54,17 @@ public class CometEntity extends CustomProjectileEntity {
     }
 
     @Override
-    protected void readCustomDataFromTag(CompoundTag tag) {
-        super.readCustomDataFromTag(tag);
+    protected void readCustomDataFromNbt(NbtCompound tag) {
+        super.readCustomDataFromNbt(tag);
         setDamage(tag.getFloat("Damage"));
+        roll = tag.getFloat("NARoll");
     }
 
     @Override
-    protected void writeCustomDataToTag(CompoundTag tag) {
-        super.writeCustomDataToTag(tag);
+    protected void writeCustomDataToNbt(NbtCompound tag) {
+        super.writeCustomDataToNbt(tag);
         tag.putFloat("Damage", getDamage());
+        tag.putFloat("NARoll", roll);
     }
 
     @Override
@@ -56,7 +72,7 @@ public class CometEntity extends CustomProjectileEntity {
         //these values are used in the renderer to rotate the comet nicely :p
         if (this.world.isClient) {
             //decided it looks better if the pitch is constant and only the yaw changes
-            this.yaw += 0.6F;
+            this.setYaw(getYaw() + 0.6F);
             if(isSubmergedInWater()){
                 MinecraftClient.getInstance().particleManager.addParticle(ParticleTypes.BUBBLE, getX(), getY(), getZ(), 0, 0, 0);
             }
@@ -81,6 +97,6 @@ public class CometEntity extends CustomProjectileEntity {
             entity.damage(DamageSource.magic(this, getOwner() instanceof LivingEntity ? getOwner() : null), getDamage());
         }
         world.createExplosion(getOwner(), getX(), getY(), getZ(), getDamage(), Explosion.DestructionType.NONE);
-        remove();
+        remove(RemovalReason.DISCARDED);
     }
 }
